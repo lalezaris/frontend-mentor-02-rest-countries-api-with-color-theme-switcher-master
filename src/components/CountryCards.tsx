@@ -16,11 +16,9 @@ type CountryCardProps = {
 const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
   return (
     <div className="country-card">
-      <img
-        className="country-flag"
-        src={country.flags.svg}
-        alt={`flag of ${country.name}`}
-      />
+      <div className="country-flag">
+        <img src={country.flags.svg} alt={`flag of ${country.name}`} />
+      </div>
       <div className="country-info">
         <h2>{country.name}</h2>
         <CountryStat label="Population" value={country.population} />
