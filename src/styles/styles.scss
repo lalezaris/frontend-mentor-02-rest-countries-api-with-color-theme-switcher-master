@@ -76,7 +76,7 @@ footer {
   justify-items: center;
   justify-content: space-evenly;
   grid-template-columns: repeat(auto-fill, 17rem);
-  grid-auto-rows: 21rem;
+  grid-auto-rows: minmax(21rem, auto);
   gap: 5rem;
   margin-top: 3rem;
 }

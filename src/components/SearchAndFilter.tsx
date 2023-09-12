@@ -3,9 +3,15 @@ import searchOutline from "../images/search-outline.svg";
 
 type SearchAndFilterProps = {
   handleSearch: (value: string) => void;
+  regions?: (string | undefined)[];
+  handleRegionFilter: (value: string) => void;
 };
 
-const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ handleSearch }) => {
+const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
+  handleSearch,
+  regions,
+  handleRegionFilter,
+}) => {
   return (
     <div className="search-container">
       <div className="search-input">
@@ -20,8 +26,16 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({ handleSearch }) => {
           }}
         />
       </div>
-      <select className="region-select">
-        <option>Filter by Region</option>
+      <select
+        className="region-select"
+        onChange={(e) => handleRegionFilter(e.target.value)}
+      >
+        <option value={""}>Filter by Region</option>
+        {regions?.map((region, i) => (
+          <option key={i} value={region}>
+            {region}
+          </option>
+        ))}
       </select>
     </div>
   );
