@@ -81,13 +81,12 @@ const IndexPage: React.FC<PageProps> = () => {
 
   return (
     <>
-      {process.env.NODE_ENV === "development" && (
-        <SearchAndFilter
-          handleSearch={debouncedSearch}
-          regions={regions}
-          handleRegionFilter={setRegionFilter}
-        />
-      )}
+      <SearchAndFilter
+        handleSearch={debouncedSearch}
+        regions={regions}
+        handleRegionFilter={setRegionFilter}
+      />
+
       {error ? (
         <div>No countries matching the search "{error}"</div>
       ) : filteredCountries ? (
