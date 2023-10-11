@@ -1,6 +1,12 @@
 import * as React from "react";
+import { formatNumber } from "../utils";
 
-const CountryStat = ({ label, value }) => {
+type CountryStatProps = {
+  label: string;
+  value: string;
+};
+
+const CountryStat: React.FC<CountryStatProps> = ({ label, value }) => {
   return (
     <div className="country-stat">
       <span className="label">{label}:</span>
@@ -21,7 +27,10 @@ const CountryCard: React.FC<CountryCardProps> = ({ country }) => {
       </div>
       <div className="country-info">
         <h2>{country.name}</h2>
-        <CountryStat label="Population" value={country.population} />
+        <CountryStat
+          label="Population"
+          value={formatNumber(country.population)}
+        />
         <CountryStat label="Region" value={country.region} />
         <CountryStat label="Capital" value={country.capital} />
       </div>

@@ -30,7 +30,7 @@ const SearchAndFilter: React.FC<SearchAndFilterProps> = ({
         className="region-select"
         onChange={(e) => handleRegionFilter(e.target.value)}
       >
-        <option value={""}>Filter by Region</option>
+        <option value={""}>All Regions</option>
         {regions?.map((region, i) => (
           <option key={i} value={region}>
             {region}

@@ -31,15 +31,15 @@ const IndexPage: React.FC<PageProps> = () => {
   }, []);
 
   React.useEffect(() => {
-    console.log(">>> IN REGION USEEFFECT", countries);
-    const regions = countries
-      ?.map((country) => country.region)
-      .filter((region, i, arr) => {
-        return region && arr.indexOf(region) === i;
-      });
+    if (!regions.length) {
+      const regions = countries
+        ?.map((country) => country.region)
+        .filter((region, i, arr) => {
+          return region && arr.indexOf(region) === i;
+        });
 
-    console.log(">>>", regions);
-    regions && setRegions(regions);
+      regions && setRegions(regions);
+    }
   }, [countries]);
 
   let [error, setError] = React.useState<string>();
@@ -74,7 +74,11 @@ const IndexPage: React.FC<PageProps> = () => {
 
   const debouncedSearch = debounce(handleSearch, 500);
 
-  console.log(">>> rerender regionFilter", regionFilter);
+  const filteredCountries =
+    regionFilter && countries
+      ? countries.filter((country) => country.region === regionFilter)
+      : countries;
+
   return (
     <>
       {process.env.NODE_ENV === "development" && (
@@ -85,15 +89,13 @@ const IndexPage: React.FC<PageProps> = () => {
         />
       )}
       {error ? (
-        <div> THERE WAS A PROBLEM WITH THE SEARCH: "{error}"</div>
-      ) : countries ? (
-        <CountryCards
-          countries={
-            regionFilter
-              ? countries.filter((country) => country.region === regionFilter)
-              : countries
-          }
-        />
+        <div>No countries matching the search "{error}"</div>
+      ) : filteredCountries ? (
+        filteredCountries.length ? (
+          <CountryCards countries={filteredCountries} />
+        ) : (
+          <div>No countries matching search in the region "{regionFilter}"</div>
+        )
       ) : (
         <div>loading...</div>
       )}
