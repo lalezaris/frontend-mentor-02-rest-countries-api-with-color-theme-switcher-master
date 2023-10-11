@@ -29,6 +29,8 @@ const config: GatsbyConfig = {
       },
     },
   ],
+  pathPrefix:
+    "/frontend-mentor-02-rest-countries-api-with-color-theme-switcher-master",
 };
 
 export default config;
